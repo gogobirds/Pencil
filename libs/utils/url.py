@@ -1,4 +1,7 @@
-__author__ = 'MKT1'
+#!/usr/bin/env python
+# coding : utf-8
+# author : 'Zend'
+# team   : "gogobirds"
 
 def normalize_url(url, https=False):
     if not url:

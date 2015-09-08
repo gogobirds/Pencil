@@ -1,4 +1,7 @@
-__author__ = 'Zend'
+#!/usr/bin/env python
+# coding : utf-8
+# author : 'Zend'
+# team   : "gogobirds"
 
 from libs.cmd import args
 from libs.searcher import Searcher
