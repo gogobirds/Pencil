@@ -3,6 +3,9 @@
 # author : 'Zend'
 # team   : "gogobirds"
 
+import socket
+import urlparse
+
 def normalize_url(url, https=False):
     if not url:
         return
@@ -14,5 +17,6 @@ def normalize_url(url, https=False):
         url = 'https://' + url
     return url
 
+
 def resolve_url(url):
-    pass
+    return socket.gethostbyname(urlparse.urlparse(url).netloc)
